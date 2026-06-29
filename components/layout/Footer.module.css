@@ -1,0 +1,119 @@
+/* 푸터 UI: 초기(다크) 디자인 — 라이트 테마와 별개로 어두운 배경 유지 */
+.footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  background: #060606;
+  color: var(--gray-200);
+  padding: 64px 0 56px;
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 28px;
+}
+
+.brand {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--white);
+}
+.tagline {
+  margin-top: 8px;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: var(--gray-400);
+}
+
+.links,
+.sns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  font-size: 14px;
+  color: var(--gray-200);
+}
+.links a:hover,
+.sns a:hover {
+  color: var(--accent);
+}
+
+.info {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 14px 28px;
+  margin: 0;
+  padding: 28px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+}
+.info div {
+  display: flex;
+  gap: 10px;
+  font-size: 13px;
+}
+.info dt {
+  flex: 0 0 auto;
+  min-width: 120px;
+  color: var(--gray-400);
+  letter-spacing: 0.04em;
+}
+.info dd {
+  margin: 0;
+  color: var(--gray-200);
+}
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+.policy {
+  display: flex;
+  gap: 18px;
+  font-size: 13px;
+}
+.policy a {
+  color: var(--gray-200);
+}
+.policy a:hover {
+  color: var(--white);
+}
+.credit {
+  text-align: right;
+}
+.copyright {
+  font-size: 12px;
+  color: var(--gray-400);
+}
+.madeby {
+  margin-top: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--gray-200);
+}
+
+@media (max-width: 768px) {
+  .credit {
+    text-align: left;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 48px 0 40px;
+  }
+  .info dt {
+    min-width: 100px;
+  }
+}

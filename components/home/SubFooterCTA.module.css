@@ -1,0 +1,49 @@
+.section {
+  position: relative;
+  padding: 88px 0;
+  color: #fff;
+  background: linear-gradient(105deg, #141418 0%, #25252b 60%, #1a1a1f 100%);
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+/* 배경 사진 사용 시 어둡게 덮는 오버레이 */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(10, 10, 12, 0.82), rgba(10, 10, 12, 0.5));
+}
+/* 우측 상단 브랜드 레드 글로우 */
+.section::before {
+  content: "";
+  position: absolute;
+  top: -80px;
+  right: -60px;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(225, 56, 13, 0.28), transparent 70%);
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+}
+.title {
+  font-size: clamp(22px, 3.2vw, 38px);
+  font-weight: 800;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+}
+.cta {
+  margin-top: 28px;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 64px 0;
+  }
+  .title {
+    line-height: 1.45;
+  }
+}

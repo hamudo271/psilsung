@@ -1,0 +1,325 @@
+/* 홈 섹션 공통 스타일 (모든 home 컴포넌트가 공유) */
+
+.section {
+  position: relative;
+  padding: 120px 0;
+  overflow: hidden;
+}
+.sectionTight {
+  padding: 96px 0;
+}
+
+.head {
+  max-width: 760px;
+  margin-bottom: 56px;
+}
+.headCenter {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+.title {
+  margin-top: 16px;
+  font-size: clamp(28px, 4vw, 46px);
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+.lead {
+  margin-top: 20px;
+  font-size: clamp(15px, 1.6vw, 18px);
+  line-height: 1.7;
+  color: var(--gray-200);
+}
+.note {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--fg-muted);
+}
+.actions {
+  margin-top: 36px;
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.actionsCenter {
+  justify-content: center;
+}
+
+/* ── Hero ───────────────────────────── */
+.hero {
+  position: relative;
+  min-height: calc(100vh - var(--header-h));
+  display: flex;
+  align-items: center;
+  padding: 80px 0;
+}
+.heroBg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}
+.heroBg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+      90deg,
+      rgba(8, 8, 9, 0.94) 0%,
+      rgba(8, 8, 9, 0.62) 45%,
+      rgba(8, 8, 9, 0.15) 100%
+    ),
+    linear-gradient(to top, rgba(8, 8, 9, 0.85) 0%, transparent 32%);
+}
+.heroInner {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+  color: var(--white); /* 어두운 크롬 이미지 위라 텍스트는 흰색 유지 */
+}
+.heroInner .eyebrow {
+  color: #fff;
+}
+.heroInner .eyebrow::before {
+  background: var(--accent);
+}
+.heroTitle {
+  margin-top: 22px;
+  font-size: clamp(36px, 6vw, 76px);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+}
+.heroSub {
+  margin-top: 26px;
+  max-width: 560px;
+  font-size: clamp(16px, 1.8vw, 20px);
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+/* 스크롤 큐 */
+.scrollCue {
+  position: absolute;
+  left: 50%;
+  bottom: 30px;
+  transform: translateX(-50%);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+}
+.scrollCue span {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.7), transparent);
+  animation: cueMove 1.8s ease-in-out infinite;
+}
+@keyframes cueMove {
+  0% {
+    transform: scaleY(0.3);
+    transform-origin: top;
+    opacity: 0.3;
+  }
+  50% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleY(0.3);
+    transform-origin: bottom;
+    opacity: 0.3;
+  }
+}
+@media (max-width: 768px) {
+  .scrollCue {
+    display: none;
+  }
+}
+
+/* ── 카드 그리드 (포트폴리오/서비스/후기) ── */
+.grid {
+  display: grid;
+  gap: 20px;
+}
+.grid3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+.grid2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.card {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: #111;
+  aspect-ratio: 4 / 3;
+  display: flex;
+  align-items: flex-end;
+}
+.cardBg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.4s ease;
+}
+.card:hover .cardBg {
+  transform: scale(1.05);
+}
+.cardBody {
+  position: relative;
+  z-index: 1;
+  padding: 22px;
+  width: 100%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent);
+}
+.cardTitle {
+  font-size: 18px;
+  font-weight: 700;
+}
+.cardDesc {
+  margin-top: 8px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--gray-200);
+}
+
+/* 신뢰 문구 */
+.trust {
+  margin-top: 40px;
+  text-align: center;
+  font-size: clamp(16px, 2vw, 22px);
+  font-weight: 600;
+  line-height: 1.6;
+  color: var(--fg-soft);
+}
+
+/* ── 차이점 블록 ── */
+.diffBlock {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 48px;
+  align-items: center;
+  padding: 56px 0;
+  border-top: 1px solid var(--line);
+}
+.diffBlock:nth-child(even) .diffMedia {
+  order: -1;
+}
+.diffTitle {
+  font-size: clamp(22px, 2.6vw, 30px);
+  font-weight: 800;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+}
+.diffDesc {
+  margin-top: 16px;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--fg-soft);
+}
+.features {
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 14px;
+}
+.feature {
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--card-bg);
+}
+.featureName {
+  font-size: 15px;
+  font-weight: 700;
+}
+.featureDesc {
+  margin-top: 4px;
+  font-size: 13px;
+  color: var(--fg-muted);
+}
+.diffMedia {
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: #111;
+}
+.diffMedia img {
+  width: 100%;
+  height: auto;
+}
+.diffMediaBg {
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  aspect-ratio: 4 / 5;
+  background-size: cover;
+  background-position: center;
+}
+
+/* ── 예약 CTA ── */
+.bookingBg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}
+.bookingBg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 8, 8, 0.78);
+}
+.badge {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 900px) {
+  .grid3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .diffBlock {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding: 44px 0;
+  }
+  .diffBlock:nth-child(even) .diffMedia {
+    order: 0;
+  }
+  .diffMediaBg {
+    aspect-ratio: 16 / 10;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 80px 0;
+  }
+  .sectionTight {
+    padding: 64px 0;
+  }
+  .head {
+    margin-bottom: 40px;
+  }
+  .grid3,
+  .grid2 {
+    grid-template-columns: 1fr;
+  }
+}

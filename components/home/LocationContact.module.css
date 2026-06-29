@@ -1,0 +1,99 @@
+.section {
+  padding: 140px 0;
+}
+
+.head {
+  text-align: center;
+  margin-bottom: 48px;
+}
+.title {
+  margin-top: 16px;
+  font-size: clamp(28px, 4vw, 46px);
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
+/* Address / Contact 행 */
+.info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 44px;
+  flex-wrap: wrap;
+  margin-bottom: 44px;
+}
+.item {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.icon {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  flex: 0 0 auto;
+  border-radius: 14px;
+  background: rgba(225, 56, 13, 0.1);
+  color: var(--accent);
+}
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.label {
+  font-size: clamp(20px, 2.4vw, 26px);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+.value {
+  font-size: clamp(14px, 1.5vw, 17px);
+  color: var(--fg-soft);
+  line-height: 1.5;
+}
+.sep {
+  color: var(--fg-muted);
+  margin: 0 2px;
+}
+.divider {
+  width: 1px;
+  height: 56px;
+  background: var(--line);
+}
+
+/* 지도 */
+.mapWrap {
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  aspect-ratio: 16 / 7;
+  background: var(--card-bg);
+}
+.mapWrap iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 72px 0;
+  }
+  .head {
+    margin-bottom: 36px;
+  }
+  .info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+  .divider {
+    display: none;
+  }
+  .mapWrap {
+    aspect-ratio: 3 / 4;
+  }
+}
