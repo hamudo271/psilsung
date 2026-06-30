@@ -1,0 +1,42 @@
+.hero {
+  padding: calc(var(--header-h) + 84px) 0 72px;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg-soft);
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  top: -120px;
+  right: -80px;
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(225, 56, 13, 0.1), transparent 70%);
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+}
+.title {
+  margin-top: 16px;
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+}
+.subtitle {
+  margin-top: 18px;
+  max-width: 640px;
+  font-size: clamp(15px, 1.7vw, 18px);
+  line-height: 1.7;
+  color: var(--fg-soft);
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: calc(var(--header-h) + 48px) 0 48px;
+  }
+}

@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { nav } from "@/data/site";
 import styles from "./Header.module.css";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const router = useRouter();
+  const isActive = (href) => router.pathname === href;
 
   // 모바일 메뉴 열렸을 때 배경 스크롤 잠금
   useEffect(() => {
@@ -25,7 +28,13 @@ export default function Header() {
 
         <nav className={styles.nav} aria-label="주 메뉴">
           {nav.map((item) => (
-            <Link key={item.label} href={item.href} className={styles.navItem}>
+            <Link
+              key={item.label}
+              href={item.href}
+              className={`${styles.navItem} ${
+                isActive(item.href) ? styles.navItemActive : ""
+              }`}
+            >
               {item.label}
             </Link>
           ))}
@@ -56,7 +65,9 @@ export default function Header() {
             <Link
               key={item.label}
               href={item.href}
-              className={styles.mobileNavItem}
+              className={`${styles.mobileNavItem} ${
+                isActive(item.href) ? styles.navItemActive : ""
+              }`}
               onClick={() => setOpen(false)}
             >
               {item.label}

@@ -1,12 +1,11 @@
 // 사이트 전역 상수 — 메뉴, 회사 정보, 외부 링크, 이미지 매핑
 // 아직 만들지 않은 내부 페이지는 "#" placeholder 로 둔다.
 
-// 미구현 페이지는 "#" placeholder. 추후 /greeting, /company 등으로 연결.
 export const nav = [
-  { label: "인사말", href: "#top" },
-  { label: "회사소개", href: "#about" },
-  { label: "서비스소개", href: "#product" },
-  { label: "견적문의", href: "#quote" },
+  { label: "인사말", href: "/greeting" },
+  { label: "회사소개", href: "/company" },
+  { label: "서비스소개", href: "/service" },
+  { label: "견적문의", href: "/contact" },
 ];
 
 export const externalLinks = {
