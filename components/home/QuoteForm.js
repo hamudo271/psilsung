@@ -1,40 +1,56 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/router";
 import { company } from "@/data/site";
 import s from "./QuoteForm.module.css";
 
+// FormSubmit: 가입 없이 폼 제출을 회사 이메일로 전달(파일 첨부 지원).
+// 최초 1회 활성화 메일 승인 필요.
+const ENDPOINT = `https://formsubmit.co/${company.email}`;
+
 export default function QuoteForm() {
-  const [form, setForm] = useState({
-    name: "",
-    company: "",
-    email: "",
-    phone: "",
-    message: "",
-  });
+  const router = useRouter();
+  const sent = router.query.sent === "1";
+  const [nextUrl, setNextUrl] = useState("");
+  const [files, setFiles] = useState([]);
+  const [dragOver, setDragOver] = useState(false);
+  const inputRef = useRef(null);
 
-  const update = (key) => (e) =>
-    setForm((f) => ({ ...f, [key]: e.target.value }));
+  useEffect(() => {
+    setNextUrl(`${window.location.origin}/contact?sent=1`);
+  }, []);
 
-  // 백엔드가 없으므로 입력값으로 메일을 작성해 고객의 메일 앱으로 보냅니다.
-  const handleSubmit = (e) => {
+  const syncNames = (fileList) =>
+    setFiles(Array.from(fileList || []).map((f) => f.name));
+
+  const onDrop = (e) => {
     e.preventDefault();
-    if (!form.name || !form.email || !form.phone) {
-      alert("성함, 이메일, 연락처는 필수 항목입니다.");
-      return;
+    setDragOver(false);
+    if (e.dataTransfer.files?.length && inputRef.current) {
+      inputRef.current.files = e.dataTransfer.files;
+      syncNames(e.dataTransfer.files);
     }
-    const subject = `[간략 견적 문의] ${form.company || form.name}`;
-    const body = [
-      `성함: ${form.name}`,
-      `업체명: ${form.company || "-"}`,
-      `이메일: ${form.email}`,
-      `연락처: ${form.phone}`,
-      "",
-      "내용:",
-      form.message || "-",
-    ].join("\n");
-    window.location.href = `mailto:${company.email}?subject=${encodeURIComponent(
-      subject
-    )}&body=${encodeURIComponent(body)}`;
   };
+
+  if (sent) {
+    return (
+      <section className={s.section} id="quote">
+        <div className="container">
+          <div className={s.success}>
+            <span className={s.checkIcon} aria-hidden>
+              ✓
+            </span>
+            <h2 className={s.title}>문의가 접수되었습니다</h2>
+            <p className={s.lead}>
+              빠르게 검토 후 연락드리겠습니다. 감사합니다.
+            </p>
+            <a href="/" className={s.homeLink}>
+              홈으로 돌아가기
+            </a>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className={s.section} id="quote">
@@ -43,33 +59,36 @@ export default function QuoteForm() {
           <span className="eyebrow">CONTACT</span>
           <h2 className={s.title}>간략 견적 문의</h2>
           <p className={s.lead}>
-            도면이나 요청사항을 남겨주시면 빠르게 검토 후 견적을 안내드립니다.
-            평일·주말 언제든 답변드립니다.
+            제작 품목·수량과 도면을 남겨주시면 빠르게 검토 후 견적을
+            안내드립니다. 평일·주말 언제든 답변드립니다.
           </p>
         </div>
 
-        <form className={`${s.card} reveal`} onSubmit={handleSubmit} noValidate>
+        <form
+          className={`${s.card} reveal`}
+          action={ENDPOINT}
+          method="POST"
+          encType="multipart/form-data"
+        >
+          {/* FormSubmit 설정 */}
+          <input type="hidden" name="_subject" value="[일성테크] 간략 견적 문의" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="text" name="_honey" style={{ display: "none" }} />
+          {nextUrl && <input type="hidden" name="_next" value={nextUrl} />}
+
           <div className={s.row}>
             <label className={s.field}>
               <span className={s.label}>
                 성함 <em>*</em>
               </span>
-              <input
-                type="text"
-                value={form.name}
-                onChange={update("name")}
-                placeholder="홍길동"
-                required
-              />
+              <input type="text" name="성함" placeholder="홍길동" required />
             </label>
             <label className={s.field}>
-              <span className={s.label}>업체명</span>
-              <input
-                type="text"
-                value={form.company}
-                onChange={update("company")}
-                placeholder="(주)일성"
-              />
+              <span className={s.label}>
+                업체명 <em>*</em>
+              </span>
+              <input type="text" name="업체명" placeholder="(주)일성" required />
             </label>
           </div>
 
@@ -80,8 +99,7 @@ export default function QuoteForm() {
               </span>
               <input
                 type="email"
-                value={form.email}
-                onChange={update("email")}
+                name="email"
                 placeholder="name@example.com"
                 required
               />
@@ -92,8 +110,7 @@ export default function QuoteForm() {
               </span>
               <input
                 type="tel"
-                value={form.phone}
-                onChange={update("phone")}
+                name="연락처"
                 placeholder="010-0000-0000"
                 required
               />
@@ -103,17 +120,44 @@ export default function QuoteForm() {
           <label className={`${s.field} ${s.full}`}>
             <span className={s.label}>내용</span>
             <textarea
+              name="내용"
               rows={5}
-              value={form.message}
-              onChange={update("message")}
               placeholder="제작 품목, 수량, 희망 납기 등을 적어주세요."
             />
           </label>
 
-          <p className={s.note}>
-            * 도면·이미지 파일은 메일 작성 화면에서 첨부해 주세요. (
-            {company.email})
-          </p>
+          <div className={`${s.field} ${s.full}`}>
+            <span className={s.label}>첨부 파일</span>
+            <label
+              className={`${s.dropzone} ${dragOver ? s.dropzoneActive : ""}`}
+              onDragOver={(e) => {
+                e.preventDefault();
+                setDragOver(true);
+              }}
+              onDragLeave={() => setDragOver(false)}
+              onDrop={onDrop}
+            >
+              <input
+                ref={inputRef}
+                type="file"
+                name="attachment"
+                multiple
+                accept="image/*,.pdf,.dwg,.dxf,.ai,.zip"
+                onChange={(e) => syncNames(e.target.files)}
+                className={s.fileInput}
+              />
+              <span className={s.dropIcon} aria-hidden>
+                ⬆
+              </span>
+              {files.length ? (
+                <span className={s.fileNames}>{files.join(", ")}</span>
+              ) : (
+                <span className={s.dropText}>
+                  도면·이미지 파일을 끌어다 놓거나 <b>클릭하여 선택</b>
+                </span>
+              )}
+            </label>
+          </div>
 
           <button type="submit" className={s.submit}>
             보내기

@@ -90,6 +90,90 @@
   color: var(--fg-muted);
 }
 
+/* 첨부 파일 드롭존 */
+.dropzone {
+  margin-top: 4px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 28px 20px;
+  border: 1.5px dashed var(--line);
+  border-radius: 12px;
+  background: var(--bg-soft);
+  cursor: pointer;
+  text-align: center;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.dropzone:hover,
+.dropzoneActive {
+  border-color: var(--accent);
+  background: rgba(225, 56, 13, 0.04);
+}
+.fileInput {
+  display: none;
+}
+.dropIcon {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(225, 56, 13, 0.1);
+  color: var(--accent);
+  font-size: 16px;
+}
+.dropText {
+  font-size: 14px;
+  color: var(--fg-muted);
+}
+.dropText b {
+  color: var(--accent);
+  font-weight: 700;
+}
+.fileNames {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--fg);
+  word-break: break-all;
+}
+
+/* 제출 성공 상태 */
+.success {
+  max-width: 560px;
+  margin: 0 auto;
+  text-align: center;
+}
+.checkIcon {
+  display: inline-grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  margin-bottom: 24px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-size: 30px;
+  font-weight: 700;
+}
+.homeLink {
+  display: inline-block;
+  margin-top: 28px;
+  padding: 13px 28px;
+  border-radius: 999px;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 15px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.homeLink:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
 .submit {
   width: 100%;
   padding: 16px;
