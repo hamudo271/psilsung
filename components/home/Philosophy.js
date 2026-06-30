@@ -7,7 +7,7 @@ const items = [
   {
     en: "Exact delivery date",
     ko: "정확한 납기일",
-    cta: { label: "간략 견적 바로가기", href: "#" },
+    cta: { label: "간략 견적 바로가기", href: "#quote" },
   },
 ];
 

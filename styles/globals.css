@@ -65,6 +65,14 @@ button {
   cursor: pointer;
 }
 
+/* 앵커 이동 시 sticky 헤더에 가려지지 않도록 오프셋 */
+#top,
+#about,
+#product,
+#quote {
+  scroll-margin-top: calc(var(--header-h) + 12px);
+}
+
 /* 공통 레이아웃 유틸 */
 .container {
   width: 100%;

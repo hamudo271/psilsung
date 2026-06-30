@@ -19,7 +19,7 @@ export default function SubFooterCTA() {
           상담을 통해 편하게 결정하세요.
         </h2>
         <div className={s.cta}>
-          <Button href="#" variant="accent">
+          <Button href="#quote" variant="accent">
             간략 견적 바로가기
           </Button>
         </div>

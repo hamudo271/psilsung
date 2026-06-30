@@ -4,7 +4,7 @@ import s from "./Home.module.css";
 
 export default function Hero() {
   return (
-    <section className={s.hero}>
+    <section className={s.hero} id="top">
       <div
         className={s.heroBg}
         style={{ backgroundImage: `url(${img.heroBg})` }}
@@ -22,7 +22,7 @@ export default function Hero() {
           납기로 완성합니다.
         </p>
         <div className={s.actions}>
-          <Button href="#">간략 견적 바로가기</Button>
+          <Button href="#quote">간략 견적 바로가기</Button>
         </div>
       </div>
 

@@ -9,7 +9,7 @@ export default function Footer() {
         <div className={styles.top}>
           <div className={styles.brandCol}>
             <span className={styles.brand}>ILSUNG</span>
-            <p className={styles.tagline}>일성테크</p>
+            <p className={styles.tagline}>ILSUNG TECHNOLOGY · 플라스틱 진공성형</p>
           </div>
 
           <nav className={styles.links} aria-label="푸터 메뉴">

@@ -1,41 +1,43 @@
-# 닷클 홈 — Next.js 재구현 설계/계획 (1차)
+# 일성테크 홈 — Next.js 사이트 설계/구성
 
-아임웹 빌더로 만든 dotcle.kr를 SiteSucker로 받은 정적 스냅샷 기준으로,
-홈 페이지 + 공통 레이아웃을 Next.js로 깔끔하게 재구현한다.
+일성테크(플라스틱 진공성형 전문)의 기업 홈페이지.
+Next.js (Pages Router) + JavaScript + CSS Modules. Railway 배포.
 
-## 결정 사항
-- **스택**: Next.js (Pages Router) + JavaScript + CSS Modules
-- **범위(1차)**: 홈(`/`) + 공통 Header/Footer. 나머지 7개 페이지는 다음 단계.
-- **백엔드 없음**: 로그인/회원가입/장바구니/문의 제출은 UI 또는 placeholder 링크까지만.
-- **이미지**: 아임웹 CDN 이미지를 `public/images/`로 받아 자체 호스팅.
-- **미구현 페이지 링크**: `#` 또는 임시 라우트.
-- **반응형**: 모바일까지 대응.
-- 원본의 섹션 순서/카피/이미지/링크는 최대한 유지, 코드만 Next.js 구조로 재구성.
+## 정체성
+- 업종: 플라스틱 진공성형 (PET·PS·PP 부품 트레이, 블리스터 포장)
+- 브랜드 컬러: 레드(#e1380d, 로고 색) + 화이트/블랙 기반 라이트 테마
+- 핵심 메시지: 최고의 품질 · 합리적인 가격 · 정확한 납기
 
 ## 구조
 ```
 dotcle-next/
-├── pages/        _app.js, _document.js, index.js
+├── pages/        _app.js(reveal 애니메이션), _document.js, index.js
 ├── components/
-│   ├── layout/   Header, Footer, Layout
-│   └── home/     Hero, PortfolioPreview, PostPayment,
-│                 Differentiators, ServiceIntro, ReviewPreview, BookingCTA
-├── public/images/
-├── styles/       globals.css
-└── data/         site.js   (메뉴/회사정보/연락처 상수)
+│   ├── layout/   Header(로고+메뉴), Footer, Layout
+│   ├── ui/       Button (solid/outline/accent — 레드)
+│   └── home/     Hero, ProductService, Philosophy,
+│                 Process, Applications, LocationContact, SubFooterCTA
+├── public/       ilsung-mark.svg(로고/파비콘), images/
+├── styles/       globals.css (디자인 토큰)
+└── data/         site.js (메뉴/회사정보/연락처)
 ```
 
-## 홈 섹션 순서 (원본 기준)
-1. Hero — "기업들의 마지막 홈페이지는 왜 결국 닷클일까요?" + 바로 문의하기
-2. PortfolioPreview — PORTFOLIO 그리드 + "연매출 100억+…" + 더보기
-3. PostPayment — "업계최초 100% 후불제"
-4. Differentiators — 3가지 차이점(①기획가이드 ②견적메일 ③유지보수)
-5. ServiceIntro — 맞춤형제작(닷클)/템플릿(템킷)
-6. ReviewPreview — 후기 미리보기
-7. BookingCTA — "7월 1주차까지 2건 예약 가능" + 바로 문의하기
+## 홈 섹션 순서
+1. Hero — "정밀 플라스틱 진공성형, 일성테크가 만듭니다."
+2. ProductService — PRODUCT SERVICE: PET / PS·PP 생산 제품
+3. Philosophy — 최고의 품질 / 최저의 가격 / 정확한 납기일
+4. Process — 진공성형 제작 공정 (상담 → 금형 → 성형 → 검수·납품)
+5. Applications — 적용 분야 (자동차·전자·완구·포장재)
+6. LocationContact — 오시는 길 (주소·연락처·지도)
+7. SubFooterCTA — 상담 유도 배너
 
-Header: 로고 · COMPANY/SERVICE/PORTFOLIO/REVIEW/ARTICLE/Q&A/CONTACT · 로그인/회원가입/장바구니 · 모바일 메뉴
-Footer: 회사정보(닷클/이진오/사업자번호/주소/이메일/영업시간) · SNS · 약관/개인정보 · 카피라이트
+Header 메뉴: 인사말 · 회사소개 · 서비스소개 · 견적문의
+Footer: 회사정보(일성테크/김남혁/사업자번호/주소/이메일/영업시간) · SNS · 약관 · 카피라이트 · Made by 웹스랩
 
-## 검증
-- `npm run build` 통과, `npm run dev`로 렌더 확인, 모바일 폭에서 레이아웃 점검.
+## 배포
+- GitHub `main` → Railway 자동 빌드·배포 (Nixpacks, `npm run build` / `npm run start`)
+
+## 미구현 / 추후
+- 인사말·회사소개·서비스소개·견적문의 개별 페이지 (현재 nav는 `#` placeholder)
+- 실제 제품 사진 (현재 ProductService는 카테고리 플레이스홀더)
+- 실제 로고 원본 파일 (현재 ilsung-mark.svg는 근사 재현)

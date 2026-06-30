@@ -1,0 +1,120 @@
+.section {
+  padding: 140px 0;
+  border-top: 1px solid var(--line);
+  background: var(--bg-soft);
+}
+
+.head {
+  max-width: 760px;
+  margin: 0 auto 48px;
+  text-align: center;
+}
+.title {
+  margin-top: 16px;
+  font-size: clamp(28px, 4vw, 46px);
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+.lead {
+  margin-top: 18px;
+  font-size: clamp(15px, 1.6vw, 18px);
+  line-height: 1.7;
+  color: var(--fg-soft);
+}
+
+.card {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 40px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.full {
+  margin-bottom: 8px;
+}
+.label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--fg-soft);
+}
+.label em {
+  color: var(--accent);
+  font-style: normal;
+}
+.field input,
+.field textarea {
+  width: 100%;
+  padding: 13px 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: inherit;
+  font-size: 15px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.field textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+.field input::placeholder,
+.field textarea::placeholder {
+  color: #b3b3ba;
+}
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(225, 56, 13, 0.12);
+}
+
+.note {
+  margin: 4px 0 24px;
+  font-size: 13px;
+  color: var(--fg-muted);
+}
+
+.submit {
+  width: 100%;
+  padding: 16px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  transition: filter 0.15s ease, transform 0.15s ease;
+}
+.submit:hover {
+  filter: brightness(1.08);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding: 80px 0;
+  }
+  .card {
+    padding: 28px 20px;
+  }
+  .row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}

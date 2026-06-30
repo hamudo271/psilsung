@@ -25,7 +25,7 @@ const groups = [
 
 export default function ProductService() {
   return (
-    <section className={s.section}>
+    <section className={s.section} id="product">
       <div className="container">
         <div className={`${s.head} reveal`}>
           <span className="eyebrow">PRODUCT SERVICE</span>
