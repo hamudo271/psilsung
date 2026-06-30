@@ -6,6 +6,7 @@ import styles from "./Header.module.css";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const router = useRouter();
   const isActive = (href) => router.pathname === href;
 
@@ -17,9 +18,17 @@ export default function Header() {
     };
   }, [open]);
 
+  // 스크롤 시 헤더에 그림자/대비 부여 (프리미엄 디테일)
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <>
-      <header className={styles.header}>
+      <header className={`${styles.header} ${scrolled ? styles.scrolled : ""}`}>
       <div className={`container ${styles.inner}`}>
         <Link href="/" className={styles.logo} aria-label="일성테크 홈">
           <img src="/ilsung-mark.svg" alt="일성테크 IS" />

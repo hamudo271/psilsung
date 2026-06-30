@@ -2,53 +2,62 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 15px 28px;
+  padding: 15px 30px;
   border-radius: 999px;
   font-size: 15px;
   font-weight: 700;
   letter-spacing: 0.01em;
-  transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease;
   white-space: nowrap;
+  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease),
+    background 0.25s var(--ease), color 0.25s var(--ease), filter 0.25s var(--ease);
 }
 .btn:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+}
+.btn:active {
+  transform: translateY(-1px);
 }
 .arrow {
-  transition: transform 0.18s ease;
+  transition: transform 0.25s var(--ease);
 }
 .btn:hover .arrow {
-  transform: translateX(4px);
+  transform: translateX(5px);
 }
 
 .solid {
   background: var(--accent);
   color: #fff;
+  box-shadow: 0 8px 20px -8px rgba(225, 56, 13, 0.55);
 }
 .solid:hover {
-  filter: brightness(1.08);
+  filter: brightness(1.06);
+  box-shadow: 0 16px 34px -10px rgba(225, 56, 13, 0.6);
 }
 
 .outline {
   background: transparent;
   color: var(--accent);
-  border: 1px solid var(--accent);
+  border: 1.5px solid var(--accent);
 }
 .outline:hover {
   background: var(--accent);
   color: #fff;
+  box-shadow: 0 14px 30px -12px rgba(225, 56, 13, 0.5);
 }
 
 .accent {
   background: var(--accent);
   color: #fff;
+  box-shadow: 0 8px 20px -8px rgba(225, 56, 13, 0.55);
 }
 .accent:hover {
-  filter: brightness(1.08);
+  filter: brightness(1.06);
+  box-shadow: 0 16px 34px -10px rgba(225, 56, 13, 0.6);
 }
 
 @media (max-width: 768px) {
   .btn {
-    padding: 14px 24px;
+    padding: 14px 26px;
     font-size: 14px;
   }
 }
