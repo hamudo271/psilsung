@@ -32,5 +32,5 @@ export const company = {
 // 사이트 이미지 에셋 별칭
 export const img = {
   // 히어로 배경 (어두운 추상 텍스처)
-  heroBg: "/images/e1bb5f76665f7.jpg",
+  heroBg: "/images/hero-bg.jpg",
 };

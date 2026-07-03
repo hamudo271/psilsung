@@ -32,8 +32,8 @@
   font-size: 18px;
 }
 .logo img {
-  width: 28px;
-  height: 28px;
+  height: 26px;
+  width: auto;
 }
 
 .nav {

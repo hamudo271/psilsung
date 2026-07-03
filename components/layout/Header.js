@@ -31,8 +31,7 @@ export default function Header() {
       <header className={`${styles.header} ${scrolled ? styles.scrolled : ""}`}>
       <div className={`container ${styles.inner}`}>
         <Link href="/" className={styles.logo} aria-label="일성테크 홈">
-          <img src="/ilsung-mark.svg" alt="일성테크 IS" />
-          <span>ILSUNG</span>
+          <img src="/ilsung-logo.png" alt="일성테크" />
         </Link>
 
         <nav className={styles.nav} aria-label="주 메뉴">

@@ -1,24 +1,28 @@
 import s from "./ProductService.module.css";
 
-// 카테고리별 생산 제품. 실제 제품 사진은 public/images/products/ 에 넣고
-// item.img 경로를 지정하면 플레이스홀더 대신 사진이 표시됩니다.
+// 카테고리별 생산 제품 사례. 사진은 public/images/products/ 에 위치.
+// cat(소재 태그)·name 은 실제 제품에 맞게 자유롭게 수정하면 됩니다.
 const groups = [
   {
     label: "PLASTIC-PET",
     items: [
-      { cat: "PET", name: "부품 트레이" },
-      { cat: "PET", name: "부품 트레이" },
-      { cat: "PET", name: "인형 블리스터" },
-      { cat: "PET", name: "부품 트레이" },
+      { cat: "PET", name: "부품 트레이", img: "/images/products/case-01.jpg" },
+      { cat: "PET", name: "부품 트레이", img: "/images/products/case-10.jpg" },
+      { cat: "PET", name: "인형 블리스터", img: "/images/products/case-12.jpg" },
+      { cat: "PET", name: "부품 트레이", img: "/images/products/case-11.jpg" },
     ],
   },
   {
     label: "PLASTIC-PS/PP",
     items: [
-      { cat: "PS", name: "자동차 부품 트레이" },
-      { cat: "PP", name: "자동차 부품 트레이" },
-      { cat: "PP", name: "자동차 부품 트레이" },
-      { cat: "PP", name: "자동차 부품 트레이" },
+      { cat: "PS", name: "자동차 부품 트레이", img: "/images/products/case-03.jpg" },
+      { cat: "PP", name: "자동차 부품 트레이", img: "/images/products/case-04.jpg" },
+      { cat: "PP", name: "부품 트레이", img: "/images/products/case-08.jpg" },
+      { cat: "PS", name: "부품 트레이", img: "/images/products/case-06.jpg" },
+      { cat: "PS", name: "부품 트레이", img: "/images/products/case-02.jpg" },
+      { cat: "PS", name: "부품 트레이", img: "/images/products/case-07.jpg" },
+      { cat: "PS", name: "부품 트레이", img: "/images/products/case-09.jpg" },
+      { cat: "PP", name: "성형 부품", img: "/images/products/case-05.jpg" },
     ],
   },
 ];
@@ -50,7 +54,11 @@ export default function ProductService() {
                 >
                   <div className={s.thumb}>
                     {it.img ? (
-                      <img src={it.img} alt={`${it.cat} ${it.name}`} />
+                      <img
+                        src={it.img}
+                        alt={`${it.cat} ${it.name}`}
+                        loading="lazy"
+                      />
                     ) : (
                       <span className={s.watermark}>{it.cat}</span>
                     )}

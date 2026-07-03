@@ -4,7 +4,8 @@ export default function Document() {
   return (
     <Html lang="ko">
       <Head>
-        <link rel="icon" type="image/svg+xml" href="/ilsung-mark.svg" />
+        <link rel="icon" type="image/png" href="/favicon.png" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link
           rel="stylesheet"
           as="style"
