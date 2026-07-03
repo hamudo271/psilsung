@@ -1,15 +1,34 @@
+import { useEffect, useState } from "react";
 import Button from "@/components/ui/Button";
-import { img } from "@/data/site";
+import { heroSlides } from "@/data/site";
 import s from "./Home.module.css";
 
+const SLIDE_MS = 6000;
+
 export default function Hero() {
+  const [active, setActive] = useState(0);
+
+  // 자동 순환 — 수동 선택 시 타이머가 리셋되도록 active 를 deps 에 포함
+  useEffect(() => {
+    const t = setInterval(
+      () => setActive((i) => (i + 1) % heroSlides.length),
+      SLIDE_MS
+    );
+    return () => clearInterval(t);
+  }, [active]);
+
   return (
     <section className={s.hero} id="top">
-      <div
-        className={s.heroBg}
-        style={{ backgroundImage: `url(${img.heroBg})` }}
-        aria-hidden
-      />
+      {heroSlides.map((slide, i) => (
+        <div
+          key={slide.src}
+          className={`${s.heroSlide} ${i === active ? s.heroSlideActive : ""}`}
+          style={{ backgroundImage: `url(${slide.src})` }}
+          aria-hidden
+        />
+      ))}
+      <div className={s.heroScrim} aria-hidden />
+
       <div className={`container ${s.heroInner} reveal`}>
         <span className={`eyebrow`}>ILSUNG · PLASTIC VACUUM FORMING</span>
         <h1 className={s.heroTitle}>
@@ -23,6 +42,30 @@ export default function Hero() {
         </p>
         <div className={s.actions}>
           <Button href="#quote">간략 견적 바로가기</Button>
+        </div>
+      </div>
+
+      <div className={`container ${s.heroCtrls}`}>
+        <p className={s.heroCaption}>
+          <span className={s.heroCaptionNum}>
+            {String(active + 1).padStart(2, "0")}
+          </span>
+          {heroSlides[active].label}
+        </p>
+        <div className={s.heroDots} role="tablist" aria-label="배경 슬라이드">
+          {heroSlides.map((slide, i) => (
+            <button
+              key={slide.src}
+              type="button"
+              role="tab"
+              aria-selected={i === active}
+              aria-label={`${slide.label} 배경 보기`}
+              className={`${s.heroDot} ${i === active ? s.heroDotActive : ""}`}
+              onClick={() => setActive(i)}
+            >
+              <span />
+            </button>
+          ))}
         </div>
       </div>
 

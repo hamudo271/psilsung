@@ -15,7 +15,8 @@
   transform: translateY(-3px);
 }
 .btn:active {
-  transform: translateY(-1px);
+  /* 프레스 피드백 — 살짝 눌리는 스케일 */
+  transform: translateY(-1px) scale(0.97);
 }
 .arrow {
   transition: transform 0.25s var(--ease);

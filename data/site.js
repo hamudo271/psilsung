@@ -29,8 +29,9 @@ export const company = {
   mapQuery: "부산 강서구 평강로345번길 53 일성테크",
 };
 
-// 사이트 이미지 에셋 별칭
-export const img = {
-  // 히어로 배경 (어두운 추상 텍스처)
-  heroBg: "/images/hero-bg.jpg",
-};
+// 메인 히어로 슬라이드 (자동 순환 배경)
+export const heroSlides = [
+  { src: "/images/hero-1.jpg", label: "진공성형 생산 라인" },
+  { src: "/images/hero-2.webp", label: "정밀 성형 제품" },
+  { src: "/images/hero-3.jpg", label: "일성테크 본사 공장" },
+];

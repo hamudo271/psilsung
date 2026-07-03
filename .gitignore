@@ -4,3 +4,7 @@
 .DS_Store
 *.log
 .env*.local
+
+# 로컬 AI 도구 (ui-ux-pro-max 스킬 등)
+/.claude
+/design-system

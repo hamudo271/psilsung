@@ -6,6 +6,8 @@ export default function Document() {
       <Head>
         <link rel="icon" type="image/png" href="/favicon.png" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        {/* 첫 히어로 배경 프리로드 — LCP 개선 */}
+        <link rel="preload" as="image" href="/images/hero-1.jpg" />
         <link
           rel="stylesheet"
           as="style"
