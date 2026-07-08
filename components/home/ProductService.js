@@ -18,10 +18,10 @@ const groups = [
       { cat: "PS", name: "자동차 부품 트레이", img: "/images/products/case-03.jpg" },
       { cat: "PP", name: "자동차 부품 트레이", img: "/images/products/case-04.jpg" },
       { cat: "PP", name: "부품 트레이", img: "/images/products/case-08.jpg" },
-      { cat: "PS", name: "부품 트레이", img: "/images/products/case-06.jpg" },
-      { cat: "PS", name: "부품 트레이", img: "/images/products/case-02.jpg" },
-      { cat: "PS", name: "부품 트레이", img: "/images/products/case-07.jpg" },
-      { cat: "PS", name: "부품 트레이", img: "/images/products/case-09.jpg" },
+      { cat: "PP", name: "부품 트레이", img: "/images/products/case-06.jpg" },
+      { cat: "PP", name: "부품 트레이", img: "/images/products/case-02.jpg" },
+      { cat: "PP", name: "부품 트레이", img: "/images/products/case-07.jpg" },
+      { cat: "PP", name: "부품 트레이", img: "/images/products/case-09.jpg" },
       { cat: "PP", name: "성형 부품", img: "/images/products/case-05.jpg" },
     ],
   },
@@ -35,7 +35,7 @@ export default function ProductService() {
           <span className="eyebrow">PRODUCT SERVICE</span>
           <h2 className={s.title}>진공성형 생산 제품</h2>
           <p className={s.lead}>
-            PET·PS·PP 소재의 부품 트레이부터 블리스터 포장까지, 용도에 맞춰
+            ABS·PET·PS·PP 소재의 부품 트레이부터 블리스터 포장까지, 용도에 맞춰
             정밀하게 성형합니다.
           </p>
         </div>

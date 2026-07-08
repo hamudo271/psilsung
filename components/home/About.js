@@ -31,7 +31,7 @@ export default function About() {
             일성테크입니다.
           </h2>
           <p className={s.lead}>
-            일성테크(ILSUNG TECHNOLOGY)는 PET·PS·PP 소재 플라스틱 진공성형 전문
+            일성테크(ILSUNG TECHNOLOGY)는 ABS·PET·PS·PP 소재 플라스틱 진공성형 전문
             기업입니다. 도면 분석과 금형 설계부터 성형·후가공·검수·납품까지 전
             과정을 직접 관리하여, 자동차·전자·완구·포장 등 다양한 산업에 꼭 맞는
             부품 트레이와 블리스터를 공급합니다.

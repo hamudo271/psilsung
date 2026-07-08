@@ -2,6 +2,11 @@ import s from "./Materials.module.css";
 
 const materials = [
   {
+    code: "ABS",
+    name: "고강도·내충격 소재",
+    desc: "충격에 강하고 치수 안정성이 우수합니다. 견고함이 필요한 산업용 부품 트레이와 케이스류에 적합합니다.",
+  },
+  {
     code: "PET",
     name: "투명·고강도 소재",
     desc: "투명도가 높아 제품이 잘 보이고 강도가 우수합니다. 부품 트레이와 인형·완구 블리스터 포장에 주로 사용됩니다.",

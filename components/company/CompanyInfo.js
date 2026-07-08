@@ -10,7 +10,7 @@ export default function CompanyInfo() {
     { k: "전화 / 팩스", v: `${company.tel} / ${company.fax}` },
     { k: "이메일", v: company.email },
     { k: "영업시간", v: company.hours },
-    { k: "사업분야", v: "플라스틱 진공성형 (PET·PS·PP 부품 트레이, 블리스터 포장)" },
+    { k: "사업분야", v: "플라스틱 진공성형 (ABS·PET·PS·PP 부품 트레이, 블리스터 포장)" },
   ];
 
   return (

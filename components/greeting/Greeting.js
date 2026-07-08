@@ -6,7 +6,7 @@ export default function Greeting() {
     <section className={s.section}>
       <div className={`container ${s.inner}`}>
         <p className={`${s.lead} reveal`}>
-          “고객의 제품을 가장 잘 담아내는 형(形)을 만듭니다.”
+          “제품을 가장 잘 담아내는 형(形)을 만듭니다.”
         </p>
 
         <div className={`${s.body} reveal`}>
@@ -14,7 +14,7 @@ export default function Greeting() {
             안녕하십니까. 일성테크 홈페이지를 찾아주셔서 진심으로 감사합니다.
           </p>
           <p>
-            저희 일성테크(ILSUNG TECHNOLOGY)는 PET·PS·PP 소재의 플라스틱
+            저희 일성테크(ILSUNG TECHNOLOGY)는 ABS·PET·PS·PP 소재의 플라스틱
             진공성형을 전문으로 하는 기업입니다. 자동차 부품 트레이부터 전자 부품
             트레이, 인형 블리스터, 산업용 포장재까지 — 고객사의 제품을 안전하게
             담고 보호하는 ‘맞춤형 성형물’을 제작해 왔습니다.

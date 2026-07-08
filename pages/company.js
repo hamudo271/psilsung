@@ -11,7 +11,7 @@ export default function CompanyPage() {
         <title>회사소개 | 일성테크 — 플라스틱 진공성형</title>
         <meta
           name="description"
-          content="일성테크(ILSUNG TECHNOLOGY)는 PET·PS·PP 소재 플라스틱 진공성형 전문 기업입니다. 회사 개요와 사업자 정보, 오시는 길을 안내합니다."
+          content="일성테크(ILSUNG TECHNOLOGY)는 ABS·PET·PS·PP 소재 플라스틱 진공성형 전문 기업입니다. 회사 개요와 사업자 정보, 오시는 길을 안내합니다."
         />
       </Head>
       <PageHero
