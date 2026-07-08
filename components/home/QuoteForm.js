@@ -1,23 +1,23 @@
-import { useState, useEffect, useRef } from "react";
-import { useRouter } from "next/router";
-import { company } from "@/data/site";
+import { useState, useRef } from "react";
 import s from "./QuoteForm.module.css";
 
-// FormSubmit: 가입 없이 폼 제출을 회사 이메일로 전달(파일 첨부 지원).
-// 최초 1회 활성화 메일 승인 필요.
-const ENDPOINT = `https://formsubmit.co/${company.email}`;
+// 첨부 총 용량 제한 (Resend 이메일 크기 여유)
+const MAX_TOTAL_BYTES = 20 * 1024 * 1024; // 20MB
+
+const readAsBase64 = (file) =>
+  new Promise((resolve, reject) => {
+    const r = new FileReader();
+    r.onload = () => resolve(String(r.result).split(",")[1]); // data URL 접두어 제거
+    r.onerror = reject;
+    r.readAsDataURL(file);
+  });
 
 export default function QuoteForm() {
-  const router = useRouter();
-  const sent = router.query.sent === "1";
-  const [nextUrl, setNextUrl] = useState("");
+  const [status, setStatus] = useState("idle"); // idle | sending | success | error
+  const [errMsg, setErrMsg] = useState("");
   const [files, setFiles] = useState([]);
   const [dragOver, setDragOver] = useState(false);
   const inputRef = useRef(null);
-
-  useEffect(() => {
-    setNextUrl(`${window.location.origin}/contact?sent=1`);
-  }, []);
 
   const syncNames = (fileList) =>
     setFiles(Array.from(fileList || []).map((f) => f.name));
@@ -31,7 +31,55 @@ export default function QuoteForm() {
     }
   };
 
-  if (sent) {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (status === "sending") return;
+    setErrMsg("");
+
+    const form = e.currentTarget;
+    const fd = new FormData(form);
+
+    const fileList = Array.from(inputRef.current?.files || []);
+    const totalBytes = fileList.reduce((sum, f) => sum + f.size, 0);
+    if (totalBytes > MAX_TOTAL_BYTES) {
+      setErrMsg("첨부 파일 총 용량은 20MB를 넘을 수 없습니다.");
+      setStatus("error");
+      return;
+    }
+
+    setStatus("sending");
+    try {
+      const filePayload = [];
+      for (const file of fileList) {
+        filePayload.push({ filename: file.name, content: await readAsBase64(file) });
+      }
+
+      const payload = {
+        name: fd.get("성함"),
+        company: fd.get("업체명"),
+        email: fd.get("email"),
+        phone: fd.get("연락처"),
+        message: fd.get("내용"),
+        company_website: fd.get("company_website"), // 허니팟
+        files: filePayload,
+      };
+
+      const r = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const data = await r.json().catch(() => ({}));
+      if (!r.ok) throw new Error(data.error || "전송에 실패했습니다. 잠시 후 다시 시도해 주세요.");
+
+      setStatus("success");
+    } catch (err) {
+      setErrMsg(err.message || "전송에 실패했습니다. 잠시 후 다시 시도해 주세요.");
+      setStatus("error");
+    }
+  };
+
+  if (status === "success") {
     return (
       <section className={s.section} id="quote">
         <div className="container">
@@ -40,9 +88,7 @@ export default function QuoteForm() {
               ✓
             </span>
             <h2 className={s.title}>문의가 접수되었습니다</h2>
-            <p className={s.lead}>
-              빠르게 검토 후 연락드리겠습니다. 감사합니다.
-            </p>
+            <p className={s.lead}>빠르게 검토 후 연락드리겠습니다. 감사합니다.</p>
             <a href="/" className={s.homeLink}>
               홈으로 돌아가기
             </a>
@@ -52,6 +98,8 @@ export default function QuoteForm() {
     );
   }
 
+  const sending = status === "sending";
+
   return (
     <section className={s.section} id="quote">
       <div className="container">
@@ -59,23 +107,21 @@ export default function QuoteForm() {
           <span className="eyebrow">CONTACT</span>
           <h2 className={s.title}>간략 견적 문의</h2>
           <p className={s.lead}>
-            제작 품목·수량과 도면을 남겨주시면 빠르게 검토 후 견적을
-            안내드립니다. 평일·주말 언제든 답변드립니다.
+            제작 품목·수량과 도면을 남겨주시면 빠르게 검토 후 견적을 안내드립니다.
+            평일·주말 언제든 답변드립니다.
           </p>
         </div>
 
-        <form
-          className={`${s.card} reveal`}
-          action={ENDPOINT}
-          method="POST"
-          encType="multipart/form-data"
-        >
-          {/* FormSubmit 설정 */}
-          <input type="hidden" name="_subject" value="[일성테크] 간략 견적 문의" />
-          <input type="hidden" name="_template" value="table" />
-          <input type="hidden" name="_captcha" value="false" />
-          <input type="text" name="_honey" style={{ display: "none" }} />
-          {nextUrl && <input type="hidden" name="_next" value={nextUrl} />}
+        <form className={`${s.card} reveal`} onSubmit={handleSubmit} noValidate>
+          {/* 허니팟 (봇 차단용, 사람에게는 숨김) */}
+          <input
+            type="text"
+            name="company_website"
+            tabIndex={-1}
+            autoComplete="off"
+            style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }}
+            aria-hidden
+          />
 
           <div className={s.row}>
             <label className={s.field}>
@@ -101,6 +147,7 @@ export default function QuoteForm() {
                 type="email"
                 name="email"
                 placeholder="name@example.com"
+                autoComplete="email"
                 required
               />
             </label>
@@ -112,6 +159,7 @@ export default function QuoteForm() {
                 type="tel"
                 name="연락처"
                 placeholder="010-0000-0000"
+                autoComplete="tel"
                 required
               />
             </label>
@@ -159,8 +207,14 @@ export default function QuoteForm() {
             </label>
           </div>
 
-          <button type="submit" className={s.submit}>
-            보내기
+          {status === "error" && (
+            <p className={s.error} role="alert">
+              {errMsg}
+            </p>
+          )}
+
+          <button type="submit" className={s.submit} disabled={sending} aria-busy={sending}>
+            {sending ? "전송 중…" : "보내기"}
           </button>
         </form>
       </div>
