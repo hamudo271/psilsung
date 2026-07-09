@@ -108,7 +108,6 @@ export default function QuoteForm() {
           <h2 className={s.title}>간략 견적 문의</h2>
           <p className={s.lead}>
             제작 품목·수량과 도면을 남겨주시면 빠르게 검토 후 견적을 안내드립니다.
-            평일·주말 언제든 답변드립니다.
           </p>
         </div>
 
