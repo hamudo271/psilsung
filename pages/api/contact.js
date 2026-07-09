@@ -42,7 +42,7 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: "필수 항목(성함·업체명·이메일·연락처)을 입력해 주세요." });
   }
 
-  const to = process.env.MAIL_TO || "psilsung@naver.com";
+  const to = process.env.MAIL_TO || "tmdfo302@naver.com";
   const from = process.env.MAIL_FROM || "일성테크 문의 <noreply@psilsung.com>";
 
   const rows = [
