@@ -14,7 +14,7 @@ export default function SubFooterCTA() {
       {BG_IMAGE && <div className={s.overlay} aria-hidden />}
       <div className={`container ${s.inner} reveal`}>
         <h2 className={s.title}>
-          평일, 주말 언제가 됐든 언제든 답변을 드립니다.
+          작은 시제품부터 대량 양산까지,
           <br />
           상담을 통해 편하게 결정하세요.
         </h2>
