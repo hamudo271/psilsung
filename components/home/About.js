@@ -2,8 +2,8 @@ import s from "./About.module.css";
 
 const strengths = [
   {
-    title: "자체 금형 설계·제작",
-    desc: "상대물 도면을 분석해 제품에 꼭 맞는 진공성형 금형을 직접 설계·제작합니다.",
+    title: "금형 설계·제작",
+    desc: "상대물 도면을 분석해 제품에 꼭 맞는 진공성형 금형을 설계·제작합니다.",
   },
   {
     title: "다품종 대응",
@@ -26,7 +26,7 @@ export default function About() {
         <div className={`${s.intro} reveal`}>
           <span className="eyebrow">ABOUT</span>
           <h2 className={s.title}>
-            정밀 진공성형 파트너,
+            진공성형 파트너,
             <br />
             일성테크입니다.
           </h2>
