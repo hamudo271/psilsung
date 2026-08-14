@@ -9,7 +9,7 @@ const groups = [
       { cat: "PET", name: "부품 트레이", img: "/images/products/case-01.jpg" },
       { cat: "PET", name: "부품 트레이", img: "/images/products/case-10.jpg" },
       { cat: "PET", name: "인형 블리스터", img: "/images/products/case-12.jpg" },
-      { cat: "PET", name: "부품 트레이", img: "/images/products/case-11-v3.jpg" },
+      { cat: "PET", name: "부품 트레이", img: "/images/products/case-11-v4.jpg" },
     ],
   },
   {
